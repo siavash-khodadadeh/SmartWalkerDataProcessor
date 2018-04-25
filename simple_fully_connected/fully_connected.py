@@ -74,11 +74,13 @@ def precision_recall_curve(logits, labels):
 
 
 train_data, train_labels, validation_data, validation_labels = get_data_and_labels(
-    DATA_ADDRESS,
     PREPROCESSED_FILE_ADDRESS,
     step_size=1,
-    width=WIDTH
+    width=WIDTH,
+    # data_address=DATA_ADDRESS,
+    data_address=None,
 )
+
 
 train_data = train_data.reshape(-1, INPUT_SIZE * WIDTH)
 validation_data = validation_data.reshape(-1, INPUT_SIZE * WIDTH)
@@ -143,7 +145,7 @@ for it in range(N_ITERATION + 1):
         test_writer.add_summary(merged_validation_summary, it)
 
         y_output = sess.run(out, feed_dict={x: x_valid_batch, y: y_valid_batch})
-        precision_recall_curve(y_output, y_valid_batch)
+        # precision_recall_curve(y_output, y_valid_batch)
 
 
 train_writer.close()

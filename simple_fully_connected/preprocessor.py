@@ -23,12 +23,13 @@ def balance_data(data, labels):
     return balanced_data, balanced_label
 
 
-def get_data_and_labels(data_address, preprocessed_file_address, step_size=1, width=5, train_ratio=0.8):
-    preprocessed_file = open(preprocessed_file_address, 'w')
-    with open(data_address) as original_file:
-        for line in original_file:
-            new_line = line.replace(',', '').replace('False', '0').replace('True', '1').replace('\n', '')
-            preprocessed_file.write(new_line + '\n')
+def get_data_and_labels(preprocessed_file_address, step_size=1, width=5, train_ratio=0.8, data_address=None):
+    if data_address is not None:
+        preprocessed_file = open(preprocessed_file_address, 'w')
+        with open(data_address) as original_file:
+            for line in original_file:
+                new_line = line.replace(',', '').replace('False', '0').replace('True', '1').replace('\n', '')
+                preprocessed_file.write(new_line + '\n')
 
     preprocessed_data = np.loadtxt(preprocessed_file_address)
     data, labels = window_stack(preprocessed_data, step_size=step_size, width=width)
