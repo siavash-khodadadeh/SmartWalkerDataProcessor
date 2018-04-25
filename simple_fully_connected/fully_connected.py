@@ -84,7 +84,7 @@ train_data = train_data.reshape(-1, INPUT_SIZE * WIDTH)
 validation_data = validation_data.reshape(-1, INPUT_SIZE * WIDTH)
 
 train_dataset = Dataset(train_data, train_labels)
-validation_dataset = Dataset(validation_data, validation_labels)
+validation_dataset = Dataset(validation_data, validation_labels, shuffle=False)
 
 
 x = tf.placeholder(dtype=tf.float32, shape=(None, INPUT_SIZE * WIDTH))
