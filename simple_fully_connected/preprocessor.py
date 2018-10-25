@@ -42,6 +42,7 @@ def get_data_and_labels(preprocessed_file_address, step_size=1, width=5, train_r
     train_data, train_labels = data[:pivot,: ,:], labels[:pivot, :]
     validation_data, validation_labels = data[pivot:, :, :], labels[pivot:, :]
 
+    # Balance data in terms of number of positive and negative examples
     train_data, train_labels = balance_data(train_data, train_labels)
 
     indices = np.arange(train_data.shape[0])
